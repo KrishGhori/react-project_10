@@ -3,7 +3,7 @@
 
 A modern registration form built using React and react-hook-form with validation and clean UI styling.
 
-## 🚀 Features
+##  Features
 
 - Form validation using react-hook-form
 - First Name validation (required, min/max length, pattern)
@@ -13,14 +13,23 @@ A modern registration form built using React and react-hook-form with validation
 - Clean and responsive UI
 - Error highlighting with custom CSS
 
-## 🛠️ Technologies Used
+- Email validation with pattern matching
+- Password validation with minimum length
+- Confirm Password matching validation
+- Real-time error messages
+- Disabled submit button during submission
+- Clean card-based UI
+- Responsive layout
+- Custom CSS styling
+  
+##  Technologies Used
 
 - React
 - react-hook-form
 - CSS3
 
-## 📂 Project Structure
-
+##  Project Structure
+```
 react-project-ten/
 │
 ├── src/
@@ -30,12 +39,30 @@ react-project-ten/
 ├── public/
 ├── package.json
 └── README.md
+```
+##  Learning Objectives
 
-## 📸 Preview
+This project covers:
 
-This project demonstrates form handling, validation logic, and UI improvement in React.
+- Form handling in React
+- Using react-hook-form
+- Input validation rules
+- Conditional rendering
+- Managing loading state
+- Styling with CSS
+- Improving user experience
 
-## 📌 Author
+##  Future Improvements
+
+- Add toast notifications
+- Add success message animation
+- Add dark mode toggle
+- Connect to backend API
+- Store user data in database
+
+
+
+##  Author
 
 Krish Ghori
 
