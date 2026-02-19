@@ -1,62 +1,104 @@
-import { useForm } from "react-hook-form"
-
-import './App.css'
+import { useForm } from "react-hook-form";
+import "./App.css";
 
 function App() {
-   const {
+  const {
     register,
     handleSubmit,
     watch,
-    formState: { errors , isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  async function onSubmit(data){
-    await new Promise((resolve) => setTimeout(resolve , 5000));
+  const password = watch("password");
+
+  async function onSubmit(data) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log(data);
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label >First Name : </label>
-        <input className={errors.firstName ? 'error-first' : ''}
-         {...register('firstName', {
-          required : true ,
-          pattern: {value:/^[A-Za-z]+$/i , message: 'first name is not as per rules' } , 
-          minLength :{value:3 , message : 'minimum length 3'} , 
-          maxLength :{value:10 , message:'maximum length 10'}
-          })} />
-          {errors.firstName && <p className='error-msg'>{errors.firstName.message}</p>}
-      </div>
-      <br />
-      <div>
-        <label >Middle Name :</label>
-        <input className={errors.middleName ? 'error-middle' : ''}
-         {...register('middleName',{
-          required : true , 
-          pattern: {value:/^[A-Za-z]+$/i , message: 'middle name is not as per rules' } , 
-          minLength :{value :3 , message : 'minimum length 3'} , 
-          maxLength :{value :10 , message: "maximum length 10"}
-          })}/>
-          {errors.middleName && <p className='error-msg'>{errors.middleName.message}</p>}
-      </div>
-      <br />
-      <div>
-        <label >Last Name :</label>
-        <input className={errors.lastName ? 'error-last' : ''}
-         {...register('lastName',{
-          required : true , 
-          pattern: {value:/^[A-Za-z]+$/i , message: 'last name is not as per rules' } , 
-          minLength :{value :3 , message : 'minimum length 3'} , 
-          maxLength :{value :10 , message: "maximum length 10"}
-          })}/>
-          {errors.lastName && <p className='error-msg'>{errors.lastName.message}</p>}
-      </div>
-      <br />
+    <div className="container">
+      <form className="form-card" onSubmit={handleSubmit(onSubmit)}>
+        <h2>Registration Form</h2>
 
-      <button disabled = {isSubmitting} value={isSubmitting ? 'submiting' : ''}>Submit</button>
-    </form>
-  )
+        {/* First Name */}
+        <div className="form-group">
+          <label>First Name</label>
+          <input
+            className={errors.firstName ? "input-error" : ""}
+            {...register("firstName", {
+              required: "First name is required",
+              pattern: {
+                value: /^[A-Za-z]+$/i,
+                message: "Only letters allowed",
+              },
+              minLength: { value: 3, message: "Minimum 3 characters" },
+              maxLength: { value: 10, message: "Maximum 10 characters" },
+            })}
+          />
+          {errors.firstName && (
+            <p className="error-msg">{errors.firstName.message}</p>
+          )}
+        </div>
+
+        {/* Email */}
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            className={errors.email ? "input-error" : ""}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: "Invalid email format",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="error-msg">{errors.email.message}</p>
+          )}
+        </div>
+
+        {/* Password */}
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            className={errors.password ? "input-error" : ""}
+            {...register("password", {
+              required: "Password is required",
+              minLength: { value: 6, message: "Minimum 6 characters" },
+            })}
+          />
+          {errors.password && (
+            <p className="error-msg">{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div className="form-group">
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            className={errors.confirmPassword ? "input-error" : ""}
+            {...register("confirmPassword", {
+              required: "Confirm your password",
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <p className="error-msg">{errors.confirmPassword.message}</p>
+          )}
+        </div>
+
+        <button disabled={isSubmitting} className="submit-btn">
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default App
+export default App;
