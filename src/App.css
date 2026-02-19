@@ -1,0 +1,13 @@
+.error-first{
+    border: 1px solid red;
+    
+}
+.error-msg{
+    color: red;
+}
+.error-middle{
+    border: 1px solid red;
+}
+.error-last{
+    border: 1px solid red;
+}
